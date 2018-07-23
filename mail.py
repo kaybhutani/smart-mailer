@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import pandas as pd
-def mailf(name, ids):
+def mailf(name, ids, msg):
 	fromaddr = "kbhutani0001@gmail.com"
 	toaddr = ids 
 	# instance of MIMEMultipart
@@ -21,8 +21,7 @@ def mailf(name, ids):
 	msg['Subject'] = "{} Welcome To Prismatic Family!".format(name)
 	 
 	# string to store the body of the m
-	body = "Thankyou for registering in Prismatic. We have added everyone to our Whatsapp group, In case you have not been added,  join by clicking this link: https://chat.whatsapp.com/17v9pdqAL6YCIVAjh78zdG.\nFollow our Facebook page for more details - https://www.facebook.com/prismatic128/  \nFor more, Contact \n Shivang garg: +91 88821 19197\n Kartikay Bhutani: +91 8802999631"
-	 
+	body = msg
 	# attach the body with the msg instance
 	msg.attach(MIMEText(body, 'plain'))
 	 
@@ -49,7 +48,7 @@ def mailf(name, ids):
 	 
 	# start TLS for security
 	s.starttls()
-	password="kayb0001"
+	password="ENTER YOUR PASSWORD"
 	# Authentication
 	s.login(fromaddr,password)
 	 
@@ -61,8 +60,9 @@ def mailf(name, ids):
 	 
 	# terminating the session
 	s.quit()
-
+msg="Thankyou for registering in Prismatic. We have added everyone to our Whatsapp group, In case you have not been added,  join by clicking this link: https://chat.whatsapp.com/17v9pdqAL6YCIVAjh78zdG.\nFollow our Facebook page for more details - https://www.facebook.com/prismatic128/  \nFor more, Contact \n Shivang garg: +91 88821 19197\n Kartikay Bhutani: +91 8802999631"
+ 
 data=pd.read_excel("data.xlsx")
 
 for i in range(len(data)):
-	mailf(data["Name"][i], data["Email"][i])
+	mailf(data["Name"][i], data["Email"][i], msg)
