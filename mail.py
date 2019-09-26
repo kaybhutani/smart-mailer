@@ -11,7 +11,8 @@ def mailf(name, ids, msg):
 	# instance of MIMEMultipart
 	msg = MIMEMultipart()
 	 
-	# storing the senders email address  
+	# storing the senders email address
+	#test git
 	msg['From'] = fromaddr
 	 
 	# storing the receivers email address 
