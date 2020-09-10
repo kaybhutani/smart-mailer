@@ -22,8 +22,9 @@ def mailf(ids, msg):
 	msg['Subject'] = "Welcome Fresher"
 	 
 	# string to store the body of the m
-	body = msg
+
 	# attach the body with the msg instance
+
 	#msg.attach(MIMEText(body, 'plain'))
 
 	msg.as_string().encode()
@@ -48,7 +49,7 @@ def mailf(ids, msg):
 	 
 	# start TLS for security
 	s.starttls()
-	password="Converge@2021"
+	password="Enter the password"
 	# Authentication
 	s.login(fromaddr,password)
 	 
