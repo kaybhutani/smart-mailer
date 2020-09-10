@@ -5,10 +5,11 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import pandas as pd
-def mailf(name, ids, msg):
-	fromaddr = "kbhutani0001@gmail.com"
+def mailf(ids, msg):
+	fromaddr = "jyc128.pr@gmail.com"
 	toaddr = ids 
 	# instance of MIMEMultipart
+	email_body = "Test"
 	msg = MIMEMultipart()
 	 
 	# storing the senders email address  
@@ -18,25 +19,25 @@ def mailf(name, ids, msg):
 	msg['To'] = toaddr
 	 
 	# storing the subject 
-	msg['Subject'] = "{} Welcome To Prismatic Family!".format(name)
+	msg['Subject'] = "Welcome Fresher"
 	 
 	# string to store the body of the m
-	body = msg
+
 	# attach the body with the msg instance
-	msg.attach(MIMEText(body, 'plain'))
-	 
+
+	#msg.attach(MIMEText(body, 'plain'))
+
+	msg.as_string().encode()
+	
 	# open the file to be sent 
-	filename = "welcome.jpg"
-	attachment = open("welcome.jpg", "rb")
-	 
+	filename = "download.jpg"
+	with open(filename, "rb") as attachment:
 	# instance of MIMEBase and named as p
-	p = MIMEBase('application', 'octet-stream')
-	 
+		p = MIMEBase('application', 'octet-stream')
 	# To change the payload into encoded form
-	p.set_payload((attachment).read())
-	 
+		p.set_payload(attachment.read())
 	# encode into base64
-	encoders.encode_base64(p)
+		encoders.encode_base64(p)
 	  
 	p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
 	 
@@ -48,7 +49,7 @@ def mailf(name, ids, msg):
 	 
 	# start TLS for security
 	s.starttls()
-	password="ENTER YOUR PASSWORD"
+	password="Enter the password"
 	# Authentication
 	s.login(fromaddr,password)
 	 
@@ -60,9 +61,11 @@ def mailf(name, ids, msg):
 	 
 	# terminating the session
 	s.quit()
-msg="Thankyou for registering in Prismatic. We have added everyone to our Whatsapp group, In case you have not been added,  join by clicking this link: https://chat.whatsapp.com/17v9pdqAL6YCIVAjh78zdG.\nFollow our Facebook page for more details - https://www.facebook.com/prismatic128/  \nFor more, Contact \n Shivang garg: +91 88821 19197\n Kartikay Bhutani: +91 8802999631"
- 
+
+msg="Welcome to JIIT, CONNECT WITH US AT: \n www.jiitconverge.in \n www.facebook.com/jiitconverge \n www.instagram.com/jiitconverge \n www.snapchat.com/add/jiitconverge20  \nFor more, Contact \n Siddharth: +91 8512032088"
 data=pd.read_excel("data.xlsx")
 
+
 for i in range(len(data)):
-	mailf(data["Name"][i], data["Email"][i], msg)
+	mailf(data["Email"][i],msg)
+	print("Email sent")
